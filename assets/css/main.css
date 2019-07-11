@@ -27,3 +27,12 @@
 .wrapcont_inner {
   padding: 20px;
 }
+.card {
+  float: left;
+}
+.cardwrapper {
+  margin-top: 50px;
+  transform: translateX(-50%);
+  margin-left: 50%;
+  display: block;
+}

@@ -9,9 +9,11 @@
   <body>
     <?php
       session_start();
-      if($_SESSION['wrongpin']) {
+      if(isset($_GET['wrongpin'])) {
         ?>
-        
+        <div class="alert alert-danger" role="alert">
+          Pin invalid!
+        </div>
         <?php
       }
     ?>
@@ -21,8 +23,8 @@
         <span>Enter Gamepin</span>
       </div>
       <div class="wrapcont_inner">
-        <form action="check-pin.php" method="post">
-          <input name="pin" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        <form action="vote.php" method="post">
+          <input name="pin" type="text" class="form-control" placeholder="Votepin" aria-label="Username" aria-describedby="addon-wrapping">
           <br>
           <button type="submit" class="btn btn-primary">GO!</button>
         </form>
