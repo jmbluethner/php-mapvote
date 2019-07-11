@@ -55,7 +55,6 @@
 
   // Make $maps an array
   $votemaps = explode(',', $maps);
-
   // Now the Maps can be accessed by $votemaps[]
 ?>
 <html>
@@ -69,6 +68,27 @@
   <body>
     <div class="cardwrapper">
       <?php
+        // Check which maps are banned
+
+        // Get Maps Banned by A
+        $sql = "SELECT bannedA FROM matches WHERE voteid='$voteid'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()) {
+          $bannedmaps = $row['bannedA'];
+        }
+        $bannedByA = explode(',', $bannedmaps);
+
+
+        // Get Maps Banned by B
+        $sql = "SELECT bannedB FROM matches WHERE voteid='$voteid'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()) {
+          $bannedmaps = $row['bannedB'];
+        }
+        $bannedByB = explode(',', $bannedmaps);
+
+        
+
         foreach($votemaps as $map) {
           ?>
           <div class="card" id="card_<?php echo $map ?>" style="width: 18rem;">
