@@ -4,11 +4,7 @@
 
 # PHP Mapvote
 
-*A PHP based Gameserver management Interface for LAN Tournaments.*  
-
-This repo is a new approach to one of my older projects called "rushB", which got deleted and is no longer available.    
-
-Get the full Manual / Documentation [here](https://github.com/nighttimedev/manual-lama)  
+*A PHP based Map-Banning System for Counterstrike Tournaments.*   
 
 ![Badge_License](https://img.shields.io/github/license/nighttimedev/php-mapvote.svg)
 ![Badege_Size](https://img.shields.io/github/repo-size/nighttimedev/php-mapvote.svg)
