@@ -7,31 +7,17 @@
 
   session_start();
 
-  $pin = $_POST['pin'];
+  if($_SESSION['login'] != true) {
+    header('Location: index.php');
+    die();
+  }
+
+  $pin = $_SESSION['pin'];
+  $team = $_SESSION['team'];
 
   $conn = new mysqli($SQLhost, $SQLuser, $SQLpass, $SQLdbname);
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
-  }
-
-  $sql = "SELECT pinA FROM matches WHERE pinA='$pin'";
-  $result = $conn->query($sql);
-
-  // Check if the Gamepin exists...
-
-  if ($result->num_rows == 0) {
-    $sql = "SELECT pinB FROM matches WHERE pinB='$pin'";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 0) {
-      // Pin does not exist
-      header('Location: index.php?wrongpin=true');
-    } else {
-      // Pin is assigned to team B
-      $team = 'B';
-    }
-  } else {
-    // Pin is assigned to team A
-    $team = 'A';
   }
 
   // Check to which voteid the gamepin is assigned to...
