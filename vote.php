@@ -5,6 +5,8 @@
   $SQLuser = $config['SQLuser'];
   $SQLpass = $config['SQLpass'];
 
+  session_start();
+
   $pin = $_POST['pin'];
 
   $conn = new mysqli($SQLhost, $SQLuser, $SQLpass, $SQLdbname);
@@ -44,6 +46,7 @@
   while($row = $result->fetch_assoc()) {
     $voteid = $row['voteid'];
   }
+  $_SESSION['voteid'] = $voteid;
 
   // Get all Maps which are available for the vote
 
@@ -56,6 +59,8 @@
   // Make $maps an array
   $votemaps = explode(',', $maps);
   // Now the Maps can be accessed by $votemaps[]
+
+  // Have to check which maps are actually already banned. Than blur out or remove ...
 ?>
 <html>
   <head>
@@ -64,8 +69,14 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/main.css">
     <title>MAPVOTE by NIGHTTIMEDEV</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      function refreshPage() {
+        jQuery("#body").load("./assets/php/sessioncheck.php",{});
+      }
+    </script>
   </head>
-  <body>
+  <body id="body">
     <div class="cardwrapper">
       <?php
         // Check which maps are banned
@@ -87,7 +98,20 @@
         }
         $bannedByB = explode(',', $bannedmaps);
 
-        
+        // If all Maps are banned, it's A's turn to Ban
+
+        if(empty($bannedByA) && empty($bannedByB)) {
+          $banTeam = 'A';
+        } else {
+          // If Maps are Banned, we have to check which Team has to ban
+          if(sizeof($bannedByA) > sizeof($bannedByB)) {
+            $banTeam = 'B';
+          } else {
+            $banTeam = 'A';
+          }
+        }
+
+        echo 'Now Banning: '.$banTeam;
 
         foreach($votemaps as $map) {
           ?>
@@ -95,12 +119,19 @@
             <img src="https://cdn.nighttimedev.com/images/counterstrike/maps/<?php echo $map ?>.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><?php echo $map ?></h5>
-              <a href="#" class="btn btn-danger">Ban this!</a>
+              <form action="banMap.php" method="POST">
+                <input type="hidden" name="banSubmit" value="<?php echo $map ?>">
+                <input type="hidden" name="banTeam" value="<?php echo $banTeam ?>">
+                <button type="submit" class="btn btn-danger">Ban this!</button>
+              </form>
             </div>
           </div>
           <?php
         }
       ?>
     </div>
+    <script>
+      //setInterval(function(){refreshPage()},2000);
+    </script>
   </body>
 </html>
