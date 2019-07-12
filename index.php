@@ -4,6 +4,7 @@
     <script src="./assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon2.ico">
     <title>MAPVOTE by NIGHTTIMEDEV</title>
   </head>
   <body>

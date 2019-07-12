@@ -50,6 +50,7 @@
 ?>
 <html>
   <head>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon2.ico">
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
