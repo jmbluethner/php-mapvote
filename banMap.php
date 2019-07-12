@@ -17,8 +17,8 @@
   }
 
   // Should be like: UPDATE bike SET full_day = 10 WHERE bike_type = 'mens_hybrid';
-  //$sql = "INSERT INTO matches (banned$bannedBy) VALUES ('$mapToBan')";
-  //$conn->query($sql);
+  $sql = "UPDATE matches SET banned$bannedBy = '$mapToBan' WHERE voteid='$voteid'";
+  $conn->query($sql);
 
-  print_r('<script>window.history.back();</script>');
+  //print_r('<script>window.history.back();</script>');
 ?>
